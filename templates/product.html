@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name if product else "Not Found" }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        .back { color: #3498db; text-decoration: none; margin-bottom: 20px; display: inline-block; }
+        .back:hover { text-decoration: underline; }
+        .product-detail { background: white; padding: 30px; border-radius: 8px; max-width: 500px; }
+        h1 { color: #333; margin-top: 0; }
+        .price { font-size: 32px; color: #27ae60; font-weight: bold; margin: 20px 0; }
+        p { color: #666; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    {% if product %}
+        <a href="/" class="back">← Back to store</a>
+        <div class="product-detail">
+            <h1>{{ product.name }}</h1>
+            <div class="price">${{ "%.2f"|format(product.price) }}</div>
+            <p><strong>ID:</strong> {{ product.id }}</p>
+            <p><strong>Description:</strong> {{ product.description }}</p>
+            <button style="padding: 10px 20px; background: #27ae60; color: white; border: none; border-radius: 4px; cursor: pointer;">Add to Cart</button>
+        </div>
+    {% else %}
+        <a href="/" class="back">← Back to store</a>
+        <h1>Product not found</h1>
+    {% endif %}
+</body>
+</html>
