@@ -36,8 +36,7 @@ def product(product_id):
     product = Product.query.get(product_id)
     return render_template("product.html", product=product) if product else "Not found", 404
 
-with app.app_context():
-    db.create_all()
-
 if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
     app.run(debug=True, host="0.0.0.0", port=5000)
