@@ -4,18 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-# Use MySQL if on Railway, SQLite for local dev
-if os.getenv("MYSQLHOST"):
-    mysql_user = os.getenv("MYSQLUSER")
-    mysql_password = os.getenv("MYSQLPASSWORD")
-    mysql_host = os.getenv("MYSQLHOST")
-    mysql_port = os.getenv("MYSQLPORT", "3306")
-    mysql_db = os.getenv("MYSQL_DB", "store")
-    db_url = f"mysql+pymysql://{mysql_user}:{mysql_password}@{mysql_host}:{mysql_port}/{mysql_db}"
-else:
-    db_url = "sqlite:///store.db"
-
-app.config["SQLALCHEMY_DATABASE_URI"] = db_url
+database_url = os.getenv("DATABASE_URL") or "sqlite:///store.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = database_url
 db = SQLAlchemy(app)
 
 class Product(db.Model):
